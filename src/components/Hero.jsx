@@ -4,30 +4,27 @@ import { Phone, ArrowRight } from "lucide-react";
 
 export default function HeroHeader() {
   
+// Only one showBar state
+  const [showBar, setShowBar] = useState(true);
 
-const [showBar, setShowBar] = useState(true); // make sure it's true initially
-useEffect(() => {
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setShowBar(false);
-    } else {
-      setShowBar(true);
-    }
-  };
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShowBar(false);
+      } else {
+        setShowBar(true);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  
   return (
     <section className="relative w-full">
-      {/* Notification bar */}
       {showBar && (
-        <div
-  className={`hero-notification-bar ${showBar ? "animate-slideIn" : ""}`}
->
-  Rooms available from 1500
-</div>
+        <div className="hero-notification-bar">
+          Rooms available from 1500
+        </div>
       )}
 
 
