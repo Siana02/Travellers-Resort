@@ -115,7 +115,12 @@ overflow-y: auto;
 
 /* Hamburger Menu (Mobile) */
 .hero-hamburger {
-  display: none; /* hidden by default, only active on mobile */
+  position: fixed;
+
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 4px;
@@ -124,61 +129,71 @@ overflow-y: auto;
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 30;
+  z-index: 100;
 }
-
+@media (min-width: 768px) {
+  .hero-hamburger {
+    display: none;
+  }
+}
 .hero-hamburger-line {
   width: 100%;
   height: 3px;
-  background-color: #2234A8;
+ background-color: #2234A8;
   transition: all 0.3s ease;
 }
 
 
 /* Morph to X when menu is open */
 .hero-hamburger-line.open:first-child {
-  transform: rotate(45deg) translateY(8px);
-  background-color: #2234A8; /* keep color visible */
+  transform: translateY(6px) rotate(45deg);
 }
 
 .hero-hamburger-line.open:last-child {
-  transform: rotate(-45deg) translateY(-8px);
-  background-color: #2234A8;
+  transform: translateY(-6px) rotate(-45deg);
 }
-
 /* Mobile Menu */
 /* Mobile Menu */
 .hero-mobile-menu {
-  position: fixed;
+ position: fixed;
   inset: 0;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 50vh; /* <-- change this from full screen to half screen */
-  padding-top: 2rem; /* optional, adjust spacing inside */
+  height: 50vh;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
+   justify-content: flex-start;
+  padding-top: 4rem;   /* centers vertically */
   align-items: center;
-  gap: 1.5rem;
-  animation: fadeDown 0.3s ease;
-  z-index: 60;
-  overflow-y: auto;
+  gap: 1.6rem;               /* clean spacing between links */
+  animation: fadeDown 0.5s ease;
+  z-index: 999;
 }
-.hero-mobile-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 2.5rem;
-  height: 2.5rem;
+.hero-mobile-menu::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+.hero-mobile-x {
+  width: 3rem;
+  height: 3rem;
+  background: white;
+  color: #2234A8;
+  font-size: 2rem;
+  border-radius: 50%;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   cursor: pointer;
-  font-size: 2rem;
-  z-index: 65; /* above menu items */
+  z-index: 60; /* above mobile menu */
+  position: fixed;
 }
+
 .hero-mobile-link {
   font-family: 'Libre Bodoni', serif;
   font-size: 1.25rem;
