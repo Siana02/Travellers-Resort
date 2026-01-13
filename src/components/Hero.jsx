@@ -1,25 +1,34 @@
-// src/components/Hero.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Phone, ArrowRight } from "lucide-react";
 
 export default function HeroHeader() {
-  // show/hide notification bar on scroll
   const [showBar, setShowBar] = useState(true);
-
-  // mobile menu open state (was missing)
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null); // reference to the mobile menu
 
+  // Show/hide notification bar on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setShowBar(false);
-      } else {
-        setShowBar(true);
-      }
+      if (window.scrollY > 50) setShowBar(false);
+      else setShowBar(true);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) document.addEventListener("mousedown", handleClickOutside);
+    else document.removeEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
+
 
   return (
     <section className="relative w-full">
