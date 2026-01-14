@@ -184,6 +184,12 @@
 .hero-hamburger-line.open:nth-child(2) {
   transform: translateY(-4px) rotate(-45deg);
 }
+@media (min-width: 1024px) {
+.hero-hamburger { display: none;}
+.hero-hamburger-line {
+  display:none;}
+}
+
 
 /* Ensure the menu is hidden on larger screens: maintain the mobile-only behavior */
 @media (min-width: 768px) {
@@ -365,7 +371,7 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
   .hero-images {
   position: relative;
   width: 100%;
-  min-height: 100%; /* or bigger if you want more vertical space */
+  min-height: 70vh; /* or bigger if you want more vertical space */
   --center-width: 35vw;  /* center container takes 30% of screen width */
   --center-height: 50vh; /* taller for impact */
   --side-width: 30vw;    /* side containers slightly smaller */
@@ -398,41 +404,46 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
   box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
 }
 }
-@media (max-width: 768px) {
-  /* On small screens, stack vertically: switch to static flow and center each item */
+Ã@media (max-width: 768px) {
   .hero-images {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    min-height: auto;
-    padding: 1rem 0 1.5rem 0;
+    position: relative;
+    width: 100%;
+    min-height: 60vh; /* enough vertical space */
+    pointer-events: none;
+    margin-top: 0.5rem;
   }
 
   .hero-image-container {
-    position: relative;
-    width: 86%;
-    max-width: 320px;
-    height: 280px;
-    border-radius: 40px; /* maintain rounded tall shape while not fully elliptical */
-    transform: none !important;
-    z-index: 1 !important;
+    position: absolute; /* keep desktop-style overlapping */
+    top: 0;
+    border-radius: 25%; /* slightly rounded rectangular */
+    overflow: hidden;
+    will-change: transform;
+    display: block;
   }
 
   .hero-image-center {
-    width: 92%;
-    max-width: 360px;
-    height: 300px;
-    z-index: 2;
-    border-radius: 48px;
+    width: 60vw;
+    height: 50vh;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    z-index: 3;
   }
 
-  .hero-image-left,
+  .hero-image-left {
+    width: 48vw; /* smaller than center */
+    height: 45vh;
+    left: calc(50% - (60vw / 2) - (48vw * 0.2)); /* slightly behind center */
+    transform: scale(0.92);
+    z-index: 2;
+  }
+
   .hero-image-right {
-    width: 80%;
-    max-width: 300px;
-    height: 260px;
-    z-index: 1;
+    width: 48vw;
+    height: 45vh;
+    left: calc(50% + (60vw / 2) - (48vw * 0.8)); /* slightly behind center */
+    transform: scale(0.92);
+    z-index: 2;
   }
 }
 
