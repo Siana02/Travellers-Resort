@@ -5,6 +5,7 @@ export default function HeroHeader() {
   const [showBar, setShowBar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const xRef = useRef(null);
 
   // Show/hide notification bar on scroll
   useEffect(() => {
@@ -16,12 +17,18 @@ export default function HeroHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when clicking anywhere outside menu
+  // Close mobile menu when clicking anywhere outside menu or X button
   useEffect(() => {
     if (!menuOpen) return;
 
     const handleClickOutside = (e) => {
-      if (!menuRef.current || !menuRef.current.contains(e.target)) {
+      // If click is outside the menu and outside the X button, close menu
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        xRef.current &&
+        !xRef.current.contains(e.target)
+      ) {
         setMenuOpen(false);
       }
     };
@@ -63,9 +70,9 @@ export default function HeroHeader() {
         {/* Mobile Hamburger */}
         <div className="md:hidden relative z-40">
           <button
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setMenuOpen((prev) => !prev)}
             className="hero-hamburger"
-            aria-label="Open menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
             <span className={`hero-hamburger-line ${menuOpen ? "open" : ""}`} />
             <span className={`hero-hamburger-line ${menuOpen ? "open" : ""}`} />
@@ -73,35 +80,41 @@ export default function HeroHeader() {
         </div>
       </header>
 
-      {/* Mobile Fullscreen Overlay */}
-      {menuOpen && (
-        <>
-          {/* Overlay Menu */}
-          <div
-            className="hero-mobile-menu fixed inset-0 z-50 flex flex-col items-center justify-center bg-white bg-opacity-95 backdrop-blur-md"
-            ref={menuRef}
-          >
-            {["About Us", "Rooms", "Contact Us", "Privacy Policy"].map((link) => (
-              <a
-                key={link}
-                href="#"
-                onClick={() => setMenuOpen(false)}
-                className="hero-mobile-link mb-6 text-2xl"
-              >
-                {link}
-              </a>
-            ))}
-          </div>
+      {/* Mobile Fullscreen Overlay — always in DOM so CSS can animate open/close */}
+      <div
+        // overlay covers entire viewport; animation controlled by .open class
+        className={`hero-mobile-menu ${menuOpen ? "open" : ""}`}
+        ref={menuRef}
+        // clicking anywhere in the overlay should close the menu
+        onClick={() => setMenuOpen(false)}
+        role="dialog"
+        aria-hidden={!menuOpen}
+      >
+        <div className="hero-mobile-menu-inner" aria-hidden={!menuOpen}>
+          {["About Us", "Rooms", "Contact Us", "Privacy Policy"].map((link) => (
+            <a
+              key={link}
+              href="#"
+              // allow link navigation and also close menu
+              onClick={() => setMenuOpen(false)}
+              className="hero-mobile-link mb-6 text-2xl"
+            >
+              {link}
+            </a>
+          ))}
+        </div>
+      </div>
 
-          {/* Close X (sibling) */}
-          <button
-            className="hero-mobile-x fixed top-4 right-4 z-60"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            ✕
-          </button>
-        </>
+      {/* Close X (sibling) fixed at top-right; always clickable when menuOpen */}
+      {menuOpen && (
+        <button
+          ref={xRef}
+          className="hero-mobile-x"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          ✕
+        </button>
       )}
     </section>
   );
