@@ -80,6 +80,35 @@ export default function HeroHeader() {
         </div>
       </header>
 
+{/* Hero Images Section */}
+      <section className="hero-images w-full relative z-10" aria-hidden="true">
+        <div className="hero-image-container hero-image-left" aria-hidden="true">
+          <img
+            src="https://via.placeholder.com/180x315?text=Left"
+            alt="Left hero visual"
+            role="presentation"
+          />
+        </div>
+
+        <div className="hero-image-container hero-image-center" aria-hidden="true">
+          <img
+            src="https://via.placeholder.com/200x350?text=Center"
+            alt="Center hero visual"
+            role="presentation"
+          />
+        </div>
+
+        <div className="hero-image-container hero-image-right" aria-hidden="true">
+          <img
+            src="https://via.placeholder.com/180x315?text=Right"
+            alt="Right hero visual"
+            role="presentation"
+          />
+        </div>
+      </section>
+
+
+
       {/* Mobile Fullscreen Overlay — always in DOM so CSS can animate open/close */}
       <div
         // overlay covers entire viewport; animation controlled by .open class

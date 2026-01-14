@@ -9,11 +9,18 @@
 .hero-header {
   position: relative;
   display: flex;
-  top: 0.75rem;
   justify-content: space-between;
   align-items: center;
+
   width: 100%;
-  padding: 1.5rem 2rem;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;   /* 👈 reduce this */
+  padding-right: 0.75rem; /* nav side can stay tighter */
+
+  margin-top: 0;          /* 👈 flush with notification bar */
+
   z-index: 15;
 }
 
@@ -24,43 +31,79 @@
   position: relative;
 }
 
+/* Main title */
 .hero-logo-main {
   font-family: 'Russo One', sans-serif;
   font-size: 2.5rem;
   color: #2234A8;
-  text-shadow: 0 0 8px #2234A8aa;
+  position: relative;
+  z-index: 2;
+
+  /* Subtle premium glow pulse */
+  animation: logoGlowPulse 4s ease-in-out infinite;
 }
 
+/* Sub title */
 .hero-logo-sub {
   font-family: 'Courgette', cursive;
-  font-size: 1.8rem; /* slightly larger than before */
+  font-size: 1.6rem; /* slightly reduced for tighter overlap */
   color: #00008C;
   position: absolute;
-  top: 2rem; /* overlaps slightly */
+
+  /* tighter overlap */
+  top: 1.4rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
+
+  opacity: 0.95;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  /* subtle parallax-like float */
+  animation: logoFloat 3.5s ease-in-out infinite;
+}
+
+/* Glow pulse animation */
+@keyframes logoGlowPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 6px rgba(34, 52, 168, 0.4),
+      0 0 12px rgba(34, 52, 168, 0.25);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(34, 52, 168, 0.6),
+      0 0 18px rgba(34, 52, 168, 0.35);
+  }
+}
+
+/* Subtle floating motion */
+@keyframes logoFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-2px); }
 }
 
 /* Pop-up Badge */
 /* ================= Hero Notification Bar ================= */
-/* ================= Hero Notification Bar ================= */
 .hero-notification-bar {
-  position: relative; /* above the header */
-  
+  position: relative;
   left: 0;
-  height: 1.0rem;
   width: 100%;
-  background-color: white; /* heroHighlight */
-  color: black;
+  background-color: #ffffff;
+  color: #000;
   text-align: center;
   font-family: 'Libre Bodoni', serif;
-  font-size: 1rem;
-  padding: 0.5rem;
+  font-size: 0.9rem;          /* slightly smaller */
+  line-height: 1.2;           /* tighter vertical rhythm */
+  padding: 0.25rem 0.75rem;   /* 👈 slimmer top/bottom */
   z-index: 10;
-overflow-y: auto;
+  /* Subtle glow */
+  box-shadow:
+    0 0 8px rgba(34, 52, 168, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.08);
   /* Slide-in animation */
   transform: translateY(-100%);
-  animation: slideInBar 0.5s forwards;
+  animation: slideInBar 0.5s ease-out forwards;
 }
 
 @keyframes slideInBar {
@@ -84,6 +127,7 @@ overflow-y: auto;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  margin-left: auto; /* 👈 THIS pushes it to the right edge */
 }
 
 .hero-nav-btn {
@@ -126,7 +170,7 @@ overflow-y: auto;
 
 .hero-hamburger-line {
   display: block;
-  width: 24px;
+  width: 35px;
   height: 2px;
   background: currentColor;
   transition: transform 200ms ease, opacity 200ms ease;
@@ -150,11 +194,12 @@ overflow-y: auto;
 }
 /* Mobile menu overlay (initially hidden above viewport, slides down when .open) */
 .hero-mobile-menu {
+  height: 40vh;
   position: fixed;
   inset: 0; /* top:0; right:0; bottom:0; left:0; */
   z-index: 50; /* above header (header z-20), below the X (z-60) */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.95); /* keep existing white opacity look */
   -webkit-backdrop-filter: blur(6px); /* keep backdrop blur look */
@@ -162,6 +207,10 @@ overflow-y: auto;
   transform: translateY(-100%); /* hidden above viewport */
   transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
   pointer-events: none; /* disable interactions when closed */
+  overflow: hidden;
+  box-shadow:
+    0 0 8px rgba(34, 52, 168, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* When menuOpen is true we add .open to slide into view and allow interactions */
@@ -175,12 +224,15 @@ overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 1rem 1.5rem; /* smaller padding to compact layout */
+  padding-top: 1.25rem;
   width: 100%;
   max-width: 28rem;
   text-align: center;
+overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Menu links styling - keep existing look/sizing */
@@ -232,6 +284,163 @@ overflow-y: auto;
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ================= Hero Images (New: structural base for 3 image containers) ================= */
+
+/* Section wrapper used for positioning/layering the image containers */
+/* Section wrapper for positioning/layering the image containers */
+.hero-images {
+  position: relative;
+  width: 100%;
+  min-height: 100%; /* enough vertical space for hero images */
+  pointer-events: none; /* purely decorative visuals; not interactive */
+  margin-top: 0.5rem;
+
+  /* CSS variables for sizing containers */
+  --center-width: 35vw;   /* center container takes 35% of viewport width */
+  --center-height: 50vh;  /* taller for visual impact */
+  --side-width: 30vw;     /* side containers slightly smaller */
+  --side-height: 45vh;
+  --overlap: 0.1; /* 10% overlap */
+
+}
+
+/* Shared styles for all image containers */
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  border-radius: 25%; /* slightly rounded rectangular shape */
+  box-shadow: 0 10px 30px rgba(34, 52, 168, 0.12);
+  will-change: transform;
+  background: #eee;
+  display: block;
+}
+
+/* Ensure images fill their containers */
+.hero-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Center image: largest and on top */
+.hero-image-center {
+  left: 50%;
+  width: var(--center-width);
+  height: var(--center-height);
+  transform: translateX(-50%) scale(1);
+  z-index: 3; /* on top */
+}
+
+
+/* Position offsets using translate for consistent centering logic */
+.hero-image-left {
+  width: var(--side-width);
+  height: var(--side-height);
+  left: calc(50% - var(--center-width)/2 - var(--side-width) * (1 - var(--overlap)));
+  transform: scale(0.9);
+  z-index: 2;
+box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
+}
+.hero-image-right {
+  width: var(--side-width);
+  height: var(--side-height);
+    left: calc(50% + var(--center-width)/2 - var(--side-width) * var(--overlap));
+  transform: scale(0.9);
+  z-index: 2;
+box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
+}
+/* Make sure containers are not interactive and remain decorative */
+.hero-image-container,
+.hero-image-container * {
+  pointer-events: none;
+}
+
+/* ========== Responsive behavior ========== */
+@media (max-width: 1024px) {
+  .hero-images {
+  position: relative;
+  width: 100%;
+  min-height: 100%; /* or bigger if you want more vertical space */
+  --center-width: 35vw;  /* center container takes 30% of screen width */
+  --center-height: 50vh; /* taller for impact */
+  --side-width: 30vw;    /* side containers slightly smaller */
+  --side-height: 45vh;
+ --overlap: 0.1; /* 10% overlap */
+
+}
+.hero-image-center {
+    width: var(--center-width);
+    height: var(--center-height);
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    z-index: 3;
+  }
+.hero-image-left {
+  width: var(--side-width);
+  height: var(--side-height);
+  left: calc(50% - (var(--center-width) / 2) - (var(--side-width) * (1 - var(--overlap))));
+  transform: scale(0.9);
+  z-index: 2;
+  box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
+}
+
+.hero-image-right {
+  width: var(--side-width);
+  height: var(--side-height);
+  left: calc(50% + (var(--center-width) / 2) - (var(--side-width) * var(--overlap)));
+  transform: scale(0.9);
+  z-index: 2;
+  box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
+}
+}
+@media (max-width: 768px) {
+  /* On small screens, stack vertically: switch to static flow and center each item */
+  .hero-images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    min-height: auto;
+    padding: 1rem 0 1.5rem 0;
+  }
+
+  .hero-image-container {
+    position: relative;
+    width: 86%;
+    max-width: 320px;
+    height: 280px;
+    border-radius: 40px; /* maintain rounded tall shape while not fully elliptical */
+    transform: none !important;
+    z-index: 1 !important;
+  }
+
+  .hero-image-center {
+    width: 92%;
+    max-width: 360px;
+    height: 300px;
+    z-index: 2;
+    border-radius: 48px;
+  }
+
+  .hero-image-left,
+  .hero-image-right {
+    width: 80%;
+    max-width: 300px;
+    height: 260px;
+    z-index: 1;
+  }
+}
+
+/* ========== End Hero Images styles ========== */
+
+
+
+
 
 /* ========== Responsive tweaks ========== */
 @media (max-width: 768px) {
