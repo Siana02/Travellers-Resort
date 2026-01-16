@@ -192,11 +192,9 @@
 
 
 /* Ensure the menu is hidden on larger screens: maintain the mobile-only behavior */
-@media (min-width: 800px) {
-  .hero-mobile-menu,
-  .hero-mobile-x {
-    display: none;
-  }
+@media (max-width: 680px) {
+  .hero-hamburger { display: flex; }
+  .hero-hamburger-line { display: block; }
 }
 /* Mobile menu overlay (initially hidden above viewport, slides down when .open) */
 .hero-mobile-menu {
@@ -404,7 +402,7 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
   box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
 }
 }
-Ã@media (max-width: 768px) {
+@media (max-width: 768px) {
   .hero-images {
   position: relative;
   width: 100%;
@@ -416,7 +414,6 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
   --overlap: 0.1; /* 10% overlap */
 
 }
-
   .hero-image-container {
     position: absolute; /* keep desktop-style overlapping */
     top: 0;
@@ -433,7 +430,7 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
     transform: translateX(-50%) scale(1);
     z-index: 3;
  }
-.heeo-image-left {
+.hero-image-left {
 width: var(--side-width);
   height: var(--side-height);
     left: calc(50% - (80vw / 2));
