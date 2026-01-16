@@ -184,7 +184,7 @@
 .hero-hamburger-line.open:nth-child(2) {
   transform: translateY(-4px) rotate(-45deg);
 }
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
 .hero-hamburger { display: none;}
 .hero-hamburger-line {
   display:none;}
@@ -192,7 +192,7 @@
 
 
 /* Ensure the menu is hidden on larger screens: maintain the mobile-only behavior */
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .hero-mobile-menu,
   .hero-mobile-x {
     display: none;
@@ -304,9 +304,9 @@ overflow-y: auto;
   margin-top: 0.5rem;
 
   /* CSS variables for sizing containers */
-  --center-width: 35vw;   /* center container takes 35% of viewport width */
+  --center-width: 80vw;   /* center container takes 35% of viewport width */
   --center-height: 50vh;  /* taller for visual impact */
-  --side-width: 30vw;     /* side containers slightly smaller */
+  --side-width: 5vw;     /* side containers slightly smaller */
   --side-height: 45vh;
   --overlap: 0.1; /* 10% overlap */
 
@@ -406,12 +406,16 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
 }
 Ã@media (max-width: 768px) {
   .hero-images {
-    position: relative;
-    width: 100%;
-    min-height: 60vh; /* enough vertical space */
-    pointer-events: none;
-    margin-top: 0.5rem;
-  }
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  --center-width: 80vw;   
+  --center-height: 50vh;  
+  --side-width: 5vw;     
+  --side-height: 45vh;
+  --overlap: 0.1; /* 10% overlap */
+
+}
 
   .hero-image-container {
     position: absolute; /* keep desktop-style overlapping */
@@ -423,25 +427,24 @@ box-shadow: 0 8px 22px rgba(34, 52, 168, 0.08);
   }
 
   .hero-image-center {
-    width: 60vw;
-    height: 50vh;
+    width: var(--center-width);
+    height: var(--center-height);
     left: 50%;
     transform: translateX(-50%) scale(1);
     z-index: 3;
-  }
-
-  .hero-image-left {
-    width: 48vw; /* smaller than center */
-    height: 45vh;
-    left: calc(50% - (60vw / 2) - (48vw * 0.2)); /* slightly behind center */
+ }
+.heeo-image-left {
+width: var(--side-width);
+  height: var(--side-height);
+    left: calc(50% - (80vw / 2));
     transform: scale(0.92);
     z-index: 2;
   }
 
   .hero-image-right {
-    width: 48vw;
-    height: 45vh;
-    left: calc(50% + (60vw / 2) - (48vw * 0.8)); /* slightly behind center */
+    width: var(--side-width);
+  height: var(--side-height);
+    left: calc(50% + (80vw / 2) - 5vw);
     transform: scale(0.92);
     z-index: 2;
   }
