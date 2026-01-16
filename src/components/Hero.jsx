@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Phone, ArrowRight } from "lucide-react";
-
+import LeftImage from "../assets/Image left .jpg";
+import CenterImage from "../assets/Image center .jpg";
+import RightImage from "../assets/Image right .jpg";
 export default function HeroHeader() {
   const [showBar, setShowBar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -84,25 +86,28 @@ export default function HeroHeader() {
       <section className="hero-images w-full relative z-10" aria-hidden="true">
         <div className="hero-image-container hero-image-left" aria-hidden="true">
           <img
-            src="https://via.placeholder.com/180x315?text=Left"
+            src={LeftImage}
             alt="Left hero visual"
             role="presentation"
+            loading="lazy"
           />
         </div>
 
         <div className="hero-image-container hero-image-center" aria-hidden="true">
           <img
-            src="https://via.placeholder.com/200x350?text=Center"
+            src={CenterImage}
             alt="Center hero visual"
             role="presentation"
+            loading="lazy"
           />
         </div>
 
         <div className="hero-image-container hero-image-right" aria-hidden="true">
           <img
-            src="https://via.placeholder.com/180x315?text=Right"
+            src={RightImage}
             alt="Right hero visual"
             role="presentation"
+            loading="lazy"
           />
         </div>
       </section>
