@@ -157,7 +157,6 @@ export default function Rooms() {
     };
 
     const touchMove = (e) => {
-      if (allowPageScroll && e.touches[0].clientY < (touchStartYRef.current || 0)) return;
       if (openRoomId || isAnimating) {
         e.preventDefault();
         return;
@@ -166,10 +165,11 @@ export default function Rooms() {
       const deltaY = touchStartYRef.current - e.touches[0].clientY;
       const threshold = 36;
       if (Math.abs(deltaY) < threshold) return;
-      e.preventDefault();
       const direction = deltaY > 0 ? 1 : -1;
-      touchStartYRef.current = e.touches[0].clientY;
+      if (allowPageScroll && direction > 0) return;
+      e.preventDefault();
       handleIntent(direction);
+      touchStartYRef.current = null;
     };
 
     stackEl.addEventListener("wheel", wheelHandler, { passive: false });
