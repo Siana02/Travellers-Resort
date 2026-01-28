@@ -28,7 +28,7 @@
   justify-content: center;
   width: clamp(3rem, 7vw, 3.75rem);
   height: clamp(3rem, 7vw, 3.75rem);
-  border-radius: 18px;
+  border-radius: 50px;
   background: #082052;
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(8, 32, 82, 0.28);
@@ -143,7 +143,7 @@
   display: block;
   width: 35px;
   height: 2px;
-  background: currentColor;
+  background: #F8F0E5;
   transition: transform 200ms ease, opacity 200ms ease;
 }
 
