@@ -12,15 +12,27 @@ export default function FeatureIcons() {
   const prefersReducedMotion = useReducedMotion();
   const MotionDiv = motion.div;
 
+  const sectionVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   const itemVariants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 14 },
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.45,
         ease: "easeOut",
-        delay: prefersReducedMotion ? 0 : i * 0.08,
+        delay: prefersReducedMotion ? 0 : 0.08 + i * 0.08,
       },
     }),
   };
@@ -28,6 +40,7 @@ export default function FeatureIcons() {
   return (
     <section className="feature-section">
       <MotionDiv
+        variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
