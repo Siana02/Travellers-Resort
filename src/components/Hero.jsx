@@ -103,8 +103,7 @@ export default function HeroHeader() {
 
           <div className="hero-text-stack">
             <h2 className="hero-title">TRAVELLERS INN</h2>
-            <p className="hero-subtitle">RESORT MALINDI</p>
-            <p className="hero-support">
+            <p className="hero-subtitle">
               Your cozy affordable stay in Watamu–Malindi
             </p>
           </div>
