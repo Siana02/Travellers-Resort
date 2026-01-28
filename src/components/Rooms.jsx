@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search, ShoppingCart, X } from "lucide-react";
 import DeluxeFamily from "../assets/Deluxe_family.jpg";
@@ -63,14 +63,20 @@ const rooms = [
 export default function Rooms() {
   const [openRoomId, setOpenRoomId] = useState(null);
   const prefersReducedMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [allowPageScroll, setAllowPageScroll] = useState(false);
+  const touchStartYRef = useRef(null);
+  const cardRefs = useRef([]);
   const MotionDiv = motion.div;
 
   useEffect(() => {
-    document.body.style.overflow = openRoomId ? "hidden" : "";
+    const lock = openRoomId || isAnimating;
+    document.body.style.overflow = lock ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [openRoomId]);
+  }, [openRoomId, isAnimating]);
 
   const drawerMotionProps = prefersReducedMotion
     ? {
@@ -86,16 +92,119 @@ export default function Rooms() {
         transition: { duration: 0.35, ease: "easeOut" },
       };
 
+  const lastIndex = rooms.length - 1;
+
+  const scrollToCard = useCallback(
+    (index) => {
+      const card = cardRefs.current[index];
+      if (!card) return;
+      setIsAnimating(true);
+      const behavior = prefersReducedMotion ? "auto" : "smooth";
+      card.scrollIntoView({ behavior, block: "start" });
+      const settleTime = prefersReducedMotion ? 0 : 450;
+      window.setTimeout(() => {
+        setIsAnimating(false);
+      }, settleTime);
+    },
+    [prefersReducedMotion],
+  );
+
+  const handleIntent = useCallback(
+    (direction) => {
+      if (openRoomId || isAnimating) return;
+
+      // exiting after last card downward
+      if (direction > 0 && activeIndex === lastIndex) {
+        setAllowPageScroll(true);
+        return;
+      }
+
+      // if already allowed normal scroll and user scrolls up, re-enter card stack
+      if (allowPageScroll && direction < 0) {
+        setAllowPageScroll(false);
+        setActiveIndex(lastIndex);
+        scrollToCard(lastIndex);
+        return;
+      }
+
+      const nextIndex = Math.min(Math.max(activeIndex + direction, 0), lastIndex);
+      if (nextIndex === activeIndex) return;
+      setActiveIndex(nextIndex);
+      scrollToCard(nextIndex);
+    },
+    [activeIndex, allowPageScroll, isAnimating, lastIndex, openRoomId, scrollToCard],
+  );
+
+  useEffect(() => {
+    const stackEl = document.getElementById("rooms-stack");
+    if (!stackEl) return;
+
+    const wheelHandler = (e) => {
+      if (allowPageScroll && e.deltaY > 0) return;
+      if (openRoomId || isAnimating) {
+        e.preventDefault();
+        return;
+      }
+      const threshold = 28;
+      if (Math.abs(e.deltaY) < threshold) return;
+      e.preventDefault();
+      const direction = e.deltaY > 0 ? 1 : -1;
+      handleIntent(direction);
+    };
+
+    const touchStart = (e) => {
+      touchStartYRef.current = e.touches[0].clientY;
+    };
+
+    const touchMove = (e) => {
+      if (allowPageScroll && e.touches[0].clientY < (touchStartYRef.current || 0)) return;
+      if (openRoomId || isAnimating) {
+        e.preventDefault();
+        return;
+      }
+      if (touchStartYRef.current == null) return;
+      const deltaY = touchStartYRef.current - e.touches[0].clientY;
+      const threshold = 36;
+      if (Math.abs(deltaY) < threshold) return;
+      e.preventDefault();
+      const direction = deltaY > 0 ? 1 : -1;
+      touchStartYRef.current = e.touches[0].clientY;
+      handleIntent(direction);
+    };
+
+    stackEl.addEventListener("wheel", wheelHandler, { passive: false });
+    stackEl.addEventListener("touchstart", touchStart, { passive: true });
+    stackEl.addEventListener("touchmove", touchMove, { passive: false });
+
+    return () => {
+      stackEl.removeEventListener("wheel", wheelHandler);
+      stackEl.removeEventListener("touchstart", touchStart);
+      stackEl.removeEventListener("touchmove", touchMove);
+    };
+  }, [allowPageScroll, handleIntent, isAnimating, openRoomId]);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      cardRefs.current[0]?.scrollIntoView({ behavior: "auto", block: "start" });
+      return;
+    }
+    const t = window.requestAnimationFrame(() => scrollToCard(0));
+    return () => window.cancelAnimationFrame(t);
+  }, [prefersReducedMotion, scrollToCard]);
+
   return (
     <section id="rooms" className="rooms-section">
       <div className="rooms-title">Find Your Perfect Stay</div>
 
-      <div className="rooms-stack" aria-label="Available rooms">
-        {rooms.map((room) => (
+      <div className="rooms-stack" id="rooms-stack" aria-label="Available rooms">
+        {rooms.map((room, index) => (
           <article
             key={room.id}
             className="room-card"
             style={{ backgroundImage: `url(${room.image})` }}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
             aria-label={room.name}
           >
             <div className="room-card-overlay">
