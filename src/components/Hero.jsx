@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Phone, ArrowRight, MapPinHouse } from "lucide-react";
 import HeroImage from "../assets/Hero_image.jpg";
 import LogoBlueBg from "../assets/Logo_bluebg.png";
+import LogoLightBg from "../assets/Logo_lightbg.png";
 export default function HeroHeader() {
   const [showBar, setShowBar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function HeroHeader() {
         {/* Logo */}
         <div className="hero-logo" aria-label="Travellers Inn logo">
           <img
-            src={LogoBlueBg}
+            src={LogoLightBg}
             alt="Travellers Inn Resort"
             className="hero-logo-img"
             loading="eager"
