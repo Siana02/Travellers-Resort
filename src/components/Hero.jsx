@@ -59,7 +59,7 @@ export default function HeroHeader() {
             src={LogoBlueBg}
             alt="Travellers Inn Resort"
             className="hero-logo-img"
-            loading="lazy"
+            loading="eager"
             decoding="async"
           />
         </div>
@@ -92,9 +92,9 @@ export default function HeroHeader() {
           src={HeroImage}
           alt="Ocean view of Travellers Inn Resort"
           className="hero-bg"
-          loading="lazy"
+          loading="eager"
           decoding="async"
-          fetchPriority="low"
+          fetchPriority="high"
         />
         <div className="hero-visual-content">
           <div className="hero-icon-wrap" aria-hidden="true">

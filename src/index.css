@@ -22,7 +22,7 @@
 }
 
 /* Logo */
- .hero-logo {
+.hero-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -43,47 +43,13 @@
 }
 
 .hero-logo:hover {
-  transform: scale(1.07) rotate(2deg);
+  transform: scale(1.07) rotate(8deg);
   box-shadow: 0 10px 26px rgba(8, 32, 82, 0.35);
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
 }
 
 .hero-logo:active {
   transform: scale(1.03);
-}
-
-.hero-logo {
-  animation: logoSpinPause 0.9s ease forwards paused;
-}
-
-.hero-logo:hover {
-  animation-play-state: running;
-}
-
-@keyframes logoSpinPause {
-  0% { transform: scale(1); }
-  70% { transform: scale(1.07) rotate(8deg); }
-  100% { transform: scale(1.05) rotate(12deg); }
-}
-
-/* Glow pulse animation */
-@keyframes logoGlowPulse {
-  0%, 100% {
-    text-shadow:
-      0 0 6px rgba(34, 52, 168, 0.4),
-      0 0 12px rgba(34, 52, 168, 0.25);
-  }
-  50% {
-    text-shadow:
-      0 0 10px rgba(34, 52, 168, 0.6),
-      0 0 18px rgba(34, 52, 168, 0.35);
-  }
-}
-
-/* Subtle floating motion */
-@keyframes logoFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-2px); }
 }
 
 /* Pop-up Badge */
@@ -288,12 +254,6 @@ overflow-y: auto;
   transform: scale(1.05);
 }
 
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
 .hero-visual {
   position: relative;
   width: 100%;
@@ -365,13 +325,10 @@ overflow-y: auto;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   animation: blurIn 0.9s ease both;
+  animation-delay: 0.05s;
   text-shadow:
     0 10px 30px rgba(0, 0, 0, 0.35),
     0 0 12px rgba(8, 32, 82, 0.6);
-}
-
-.hero-title {
-  animation-delay: 0.05s;
 }
 
 .hero-title::selection,
@@ -530,15 +487,6 @@ overflow-y: auto;
     padding: 0.8rem 1rem;
   }
   
-  .hero-logo-main {
-    font-size: 2rem;
-  }
-
-  .hero-logo-sub {
-    font-size: 1.5rem;
-    top: 1.8rem;
-  }
-
   .hero-nav {
     display: none; /* hide desktop nav buttons */
   }
