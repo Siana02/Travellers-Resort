@@ -565,7 +565,7 @@ overflow-y: auto;
   color: #f8f0e5;
   border: 2px solid rgba(8, 32, 82, 0.3);
   box-shadow: 0 8px 18px rgba(8, 32, 82, 0.12), 0 0 0 2px rgba(8, 32, 82, 0.3);
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
 }
 
 .feature-label {
@@ -574,20 +574,18 @@ overflow-y: auto;
   line-height: 1.4;
 }
 
-@media (hover: hover) {
-  .feature-card:hover {
-    transform: scale(1.05) translateY(-4px);
-    background: #082052;
-    color: #f8f0e5;
-    box-shadow: 0 14px 32px rgba(8, 32, 82, 0.2);
-  }
+.feature-card:hover {
+  transform: scale(1.05) translateY(-4px);
+  background: rgba(255, 255, 255, 0.8);
+  color: #082052;
+  box-shadow: 0 14px 32px rgba(8, 32, 82, 0.2);
+}
 
-  .feature-card:hover .feature-icon {
-    background: #f8f0e5;
-    color: #082052;
-    border-color: rgba(8, 32, 82, 0.5);
-    box-shadow: 0 10px 22px rgba(8, 32, 82, 0.14), 0 0 0 2px rgba(8, 32, 82, 0.5);
-  }
+.feature-card:hover .feature-icon {
+  background: #f8f0e5;
+  color: #082052;
+  border-color: rgba(8, 32, 82, 0.5);
+  box-shadow: 0 10px 22px rgba(8, 32, 82, 0.14), 0 0 0 2px rgba(8, 32, 82, 0.5);
 }
 
 @media (min-width: 768px) {
