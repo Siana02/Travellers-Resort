@@ -39,15 +39,15 @@ export default function FeatureIcons() {
             return (
               <MotionDiv
                 key={feature.label}
-                className="group flex flex-col items-center text-center gap-6 md:gap-8 lg:gap-10 p-10 md:p-12 lg:p-14 transition-transform duration-200 md:hover:scale-[1.04] md:hover:-translate-y-1"
+                className="group flex flex-col items-center text-center gap-8 md:gap-10 lg:gap-12 p-12 md:p-14 lg:p-16 transition-transform duration-200 md:hover:scale-[1.05] md:hover:-translate-y-1 border border-[#082052] rounded-xl"
                 variants={itemVariants}
                 custom={index}
               >
-                <div className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#082052] text-[#F8F0E5] transition-colors duration-200 md:group-hover:bg-[#f8f0e5] md:group-hover:text-[#082052] ring-1 ring-[#082052]/20 md:group-hover:ring-[#082052]/40">
-                  <Icon size={24} strokeWidth={1.8} />
+                <div className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full bg-[#082052] text-[#F8F0E5] transition-colors duration-200 md:group-hover:bg-[#f8f0e5] md:group-hover:text-[#082052] ring-2 ring-[#082052]/30 md:group-hover:ring-[#082052]/50">
+                  <Icon size={30} strokeWidth={1.9} />
                 </div>
                 <p
-                  className="text-sm md:text-base font-medium leading-snug text-[#082052]"
+                  className="text-base md:text-lg lg:text-xl font-medium leading-snug text-[#082052]"
                   style={{ fontFamily: "'Libre Bodoni', serif" }}
                 >
                   {feature.label}
