@@ -497,24 +497,25 @@ overflow-y: auto;
 .feature-section {
   width: 100%;
   background: #f8f0e5;
-  padding: 5rem 2rem 6rem;
+  padding: 5rem 0 6rem;
   position: relative;
   z-index: 10;
 }
 
 .feature-wrapper {
-  margin: 0 auto;
-  max-width: 1152px;
-  border-radius: 18px;
-  border: 1px solid rgba(8, 32, 82, 0.14);
+  margin: 0;
+  max-width: none;
+  border-radius: 0;
+  border: none;
   background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 12px rgba(8, 32, 82, 0.08);
+  box-shadow: none;
+  width: 100%;
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 0;
   border-top: 1px solid rgba(8, 32, 82, 0.14);
   border-left: 1px solid rgba(8, 32, 82, 0.14);
 }
@@ -526,7 +527,7 @@ overflow-y: auto;
   justify-content: center;
   text-align: center;
   gap: 1.5rem;
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 12px;
   border: 1px solid rgba(8, 32, 82, 0.3);
   background: #f8f0e5;
@@ -591,16 +592,16 @@ overflow-y: auto;
 
 @media (min-width: 768px) {
   .feature-section {
-    padding: 6rem 2.5rem 7rem;
+    padding: 6rem 0 7rem;
   }
 
   .feature-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2.5rem;
+    gap: 0;
   }
 
   .feature-card {
-    padding: 3rem;
+    padding: 2.75rem;
     gap: 2rem;
   }
 
@@ -611,10 +612,6 @@ overflow-y: auto;
 }
 
 @media (min-width: 1024px) {
-  .feature-grid {
-    gap: 3rem;
-  }
-
   .feature-card {
     padding: 3.5rem;
     gap: 2.5rem;
