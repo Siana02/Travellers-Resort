@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Phone, ArrowRight, MapPinHouse } from "lucide-react";
 import HeroImage from "../assets/Hero_image.jpg";
+import LogoBlueBg from "../assets/Logo_bluebg.png";
 export default function HeroHeader() {
   const [showBar, setShowBar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,11 +52,16 @@ export default function HeroHeader() {
         </div>
       )}
 
-      <header className="hero-header flex justify-between items-center px-6 py-6 w-full relative z-20">
+      <header className="hero-header flex justify-between items-center px-6 w-full relative z-20">
         {/* Logo */}
-        <div className="hero-logo relative">
-          <h1 className="hero-logo-main">Travellers Inn</h1>
-          <p className="hero-logo-sub">Resort</p>
+        <div className="hero-logo" aria-label="Travellers Inn logo">
+          <img
+            src={LogoBlueBg}
+            alt="Travellers Inn Resort"
+            className="hero-logo-img"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         {/* Desktop Nav */}
@@ -81,12 +87,15 @@ export default function HeroHeader() {
       </header>
 
 {/* Hero Images Section */}
-      <section
-        className="hero-visual w-full relative z-10"
-        aria-label="Resort hero"
-        style={{ backgroundImage: `url(${HeroImage})` }}
-      >
-        <div className="hero-visual-overlay" aria-hidden="true" />
+      <section className="hero-visual w-full relative z-10" aria-label="Resort hero">
+        <img
+          src={HeroImage}
+          alt="Ocean view of Travellers Inn Resort"
+          className="hero-bg"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
         <div className="hero-visual-content">
           <div className="hero-icon-wrap" aria-hidden="true">
             <MapPinHouse className="hero-pin-icon" />
