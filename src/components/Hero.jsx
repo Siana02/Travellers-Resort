@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Phone, ArrowRight } from "lucide-react";
-import LeftImage from "../assets/Image left .jpg";
-import CenterImage from "../assets/Image center .jpg";
-import RightImage from "../assets/Image right .jpg";
+import { Phone, ArrowRight, MapPinHouse } from "lucide-react";
+import HeroImage from "../assets/Hero_image.jpg";
 export default function HeroHeader() {
   const [showBar, setShowBar] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -83,35 +81,37 @@ export default function HeroHeader() {
       </header>
 
 {/* Hero Images Section */}
-      <section className="hero-images w-full relative z-10" aria-hidden="true">
-        <div className="hero-image-container hero-image-left" aria-hidden="true">
-          <img
-            src={LeftImage}
-            alt="Left hero visual"
-            role="presentation"
-            loading="lazy"
-          />
-        </div>
+      <section
+        className="hero-visual w-full relative z-10"
+        aria-label="Resort hero"
+        style={{ backgroundImage: `url(${HeroImage})` }}
+      >
+        <div className="hero-visual-overlay" aria-hidden="true" />
+        <div className="hero-visual-content">
+          <div className="hero-icon-wrap" aria-hidden="true">
+            <MapPinHouse className="hero-pin-icon" />
+          </div>
 
-        <div className="hero-image-container hero-image-center" aria-hidden="true">
-          <img
-            src={CenterImage}
-            alt="Center hero visual"
-            role="presentation"
-            loading="lazy"
-          />
-        </div>
+          <div className="hero-text-stack">
+            <h2 className="hero-title">TRAVELLERS INN</h2>
+            <p className="hero-subtitle">RESORT MALINDI</p>
+            <p className="hero-support">
+              Your cozy affordable stay in Watamu–Malindi
+            </p>
+          </div>
 
-        <div className="hero-image-container hero-image-right" aria-hidden="true">
-          <img
-            src={RightImage}
-            alt="Right hero visual"
-            role="presentation"
-            loading="lazy"
-          />
+          <div className="hero-cta-row">
+            <a className="hero-cta hero-cta-primary" href="/booking">
+              <ArrowRight size={20} />
+              <span>Book Now</span>
+            </a>
+            <a className="hero-cta hero-cta-secondary" href="tel:0717666666">
+              <Phone size={20} />
+              <span>Contact Us</span>
+            </a>
+          </div>
         </div>
       </section>
-
 
 
       {/* Mobile Fullscreen Overlay — always in DOM so CSS can animate open/close */}
