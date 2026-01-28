@@ -60,7 +60,7 @@ export default function HeroHeader() {
             src={LogoLightBg}
             alt="Travellers Inn Resort"
             className="hero-logo-img"
-            loading="eager"
+            loading="lazy"
             decoding="async"
           />
         </div>
