@@ -97,6 +97,8 @@
   justify-content: flex-end;
   gap: 1.25rem;
   margin-left: auto; /* 👈 THIS pushes it to the right edge */
+  position: relative;
+  z-index: 30;
 }
 
 .hero-nav-btn {

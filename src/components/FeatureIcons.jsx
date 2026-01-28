@@ -26,7 +26,7 @@ export default function FeatureIcons() {
   };
 
   return (
-    <section className="w-full bg-[#f8f0e5] px-8 py-20 md:py-24">
+    <section className="w-full bg-[#f8f0e5] px-8 py-20 md:py-24 relative z-10">
       <MotionDiv
         initial="hidden"
         whileInView="visible"
