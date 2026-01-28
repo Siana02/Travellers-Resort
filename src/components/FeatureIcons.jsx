@@ -26,7 +26,7 @@ export default function FeatureIcons() {
   };
 
   return (
-    <section className="w-full bg-[#f8f0e5] px-6 py-12 md:py-14">
+    <section className="w-full bg-[#f8f0e5] px-8 py-20 md:py-24">
       <MotionDiv
         initial="hidden"
         whileInView="visible"
@@ -39,7 +39,7 @@ export default function FeatureIcons() {
             return (
               <MotionDiv
                 key={feature.label}
-                className="group flex flex-col items-center text-center gap-3 md:gap-4 lg:gap-5 p-5 md:p-6 lg:p-7 transition-transform duration-200 md:hover:scale-[1.04] md:hover:-translate-y-1"
+                className="group flex flex-col items-center text-center gap-6 md:gap-8 lg:gap-10 p-10 md:p-12 lg:p-14 transition-transform duration-200 md:hover:scale-[1.04] md:hover:-translate-y-1"
                 variants={itemVariants}
                 custom={index}
               >
