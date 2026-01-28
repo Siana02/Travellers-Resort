@@ -492,3 +492,131 @@ overflow-y: auto;
     display: flex; /* show hamburger */
   }
 }
+
+/* ================= Feature Icons Section ================= */
+.feature-section {
+  width: 100%;
+  background: #f8f0e5;
+  padding: 3.5rem 0 4.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.feature-wrapper {
+  margin: 0;
+  max-width: none;
+  border-radius: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+  width: 100%;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(8, 32, 82, 0.14);
+  border-left: 1px solid rgba(8, 32, 82, 0.14);
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(8, 32, 82, 0.3);
+  background: #f8f0e5;
+  color: #082052;
+  transition: transform 200ms ease, background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 10px 24px rgba(8, 32, 82, 0.06);
+  position: relative;
+}
+
+.feature-card::before,
+.feature-card::after {
+  content: "";
+  position: absolute;
+  background: rgba(8, 32, 82, 0.14);
+}
+
+.feature-card::before {
+  inset: -1px auto -1px -1px;
+  width: 1px;
+}
+
+.feature-card::after {
+  inset: -1px -1px auto -1px;
+  height: 1px;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background: #082052;
+  color: #f8f0e5;
+  border: 2px solid rgba(8, 32, 82, 0.3);
+  box-shadow: 0 8px 18px rgba(8, 32, 82, 0.12), 0 0 0 2px rgba(8, 32, 82, 0.3);
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out, box-shadow 200ms ease-in-out;
+}
+
+.feature-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.feature-card:hover {
+  transform: scale(1.05) translateY(-4px);
+  background: rgba(255, 255, 255, 0.8);
+  color: #082052;
+  box-shadow: 0 14px 32px rgba(8, 32, 82, 0.2);
+}
+
+.feature-card:hover .feature-icon {
+  background: #f8f0e5;
+  color: #082052;
+  border-color: rgba(8, 32, 82, 0.5);
+  box-shadow: 0 10px 22px rgba(8, 32, 82, 0.14), 0 0 0 2px rgba(8, 32, 82, 0.5);
+}
+
+@media (min-width: 768px) {
+  .feature-section {
+    padding: 4rem 0 5rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .feature-card {
+    padding: 2.75rem;
+    gap: 2rem;
+  }
+
+  .feature-icon {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .feature-card {
+    padding: 3.5rem;
+    gap: 2.5rem;
+  }
+
+  .feature-icon {
+    width: 6rem;
+    height: 6rem;
+  }
+}
