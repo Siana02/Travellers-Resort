@@ -21,6 +21,237 @@
   color: #f8f0e5;
 }
 
+/* ================= Rooms Section ================= */
+.rooms-section {
+  position: relative;
+  background: #f8f0e5;
+  color: #f8f0e5;
+}
+
+.rooms-title {
+  text-align: center;
+  font-family: 'Libre Bodoni', serif;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.5rem);
+  color: #082052;
+  padding: 1.75rem 1rem 0.75rem;
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.rooms-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0 0 2rem;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.room-card {
+  position: sticky;
+  top: 0;
+  height: min(90vh, 900px);
+  min-height: 80vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  scroll-snap-align: start;
+  isolation: isolate;
+}
+
+.room-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 0;
+}
+
+.room-card-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1.5rem clamp(1rem, 4vw, 2rem);
+}
+
+.room-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.room-name {
+  font-family: 'Libre Bodoni', serif;
+  font-size: clamp(1.35rem, 2vw + 0.7rem, 2rem);
+  color: #fdfaf5;
+  padding: 0.35rem 0.6rem;
+  background: rgba(8, 32, 82, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  line-height: 1.3;
+}
+
+.room-price {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #fdfaf5;
+  background: rgba(248, 240, 229, 0.8);
+  color: #082052;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.room-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.room-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 240, 229, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fdfaf5;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.room-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.room-cta-primary {
+  background: rgba(248, 240, 229, 0.9);
+  color: #082052;
+  border-color: rgba(8, 32, 82, 0.12);
+  text-decoration: none;
+}
+
+.room-cta span {
+  font-weight: 600;
+}
+
+.room-drawer {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: rgba(8, 32, 82, 0.9);
+  color: #fdfaf5;
+  padding: 1.2rem 1.25rem 1.5rem;
+  z-index: 2;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.room-drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-right: 2.5rem;
+}
+
+.room-drawer-title {
+  font-family: 'Libre Bodoni', serif;
+  font-size: 1.2rem;
+}
+
+.room-drawer-text {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: rgba(253, 250, 245, 0.92);
+}
+
+.room-drawer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.room-chip {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(248, 240, 229, 0.14);
+  border: 1px solid rgba(248, 240, 229, 0.25);
+  font-size: 0.9rem;
+}
+
+.room-drawer-close {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
+  background: rgba(248, 240, 229, 0.14);
+  border: 1px solid rgba(248, 240, 229, 0.35);
+  color: #fdfaf5;
+  border-radius: 999px;
+  padding: 0.45rem;
+  cursor: pointer;
+}
+
+.rooms-end-peek {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #082052;
+  font-weight: 600;
+  font-family: 'Libre Bodoni', serif;
+  background: linear-gradient(180deg, rgba(248, 240, 229, 0) 0%, rgba(248, 240, 229, 0.9) 100%);
+  margin-top: -1rem;
+}
+
+@media (max-width: 768px) {
+  .rooms-stack {
+    gap: 0.9rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .room-card {
+    border-radius: 16px;
+  }
+
+  .room-card-overlay {
+    padding: 1.25rem 1rem;
+  }
+
+  .room-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .room-card-bottom {
+    gap: 0.6rem;
+  }
+
+  .room-cta,
+  .room-cta-primary {
+    flex: 1 1 50%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rooms-stack {
+    scroll-behavior: auto;
+  }
+}
+
 /* Logo */
 .hero-logo {
   display: inline-flex;
