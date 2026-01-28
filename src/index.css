@@ -479,16 +479,105 @@ overflow-y: auto;
 
 
 /* ========== Responsive tweaks ========== */
-@media (max-width: 768px) {
-  .hero-header {
-    padding: 0.8rem 1rem;
-  }
-  
-  .hero-nav {
-    display: none; /* hide desktop nav buttons */
+  @media (max-width: 768px) {
+    .hero-header {
+      padding: 0.8rem 1rem;
+    }
+    
+    .hero-nav {
+      display: none; /* hide desktop nav buttons */
+    }
+
+    .hero-hamburger {
+      display: flex; /* show hamburger */
+    }
   }
 
-  .hero-hamburger {
-    display: flex; /* show hamburger */
+/* ================= Feature Icons Section ================= */
+.feature-section {
+  width: 100%;
+  background: #f8f0e5;
+  padding: 5rem 2rem 6rem;
+  position: relative;
+  z-index: 10;
+}
+
+.feature-wrapper {
+  margin: 0 auto;
+  max-width: 1100px;
+  border-radius: 18px;
+  border: 1px solid rgba(8, 32, 82, 0.14);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(8, 32, 82, 0.08);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(8, 32, 82, 0.3);
+  background: #f8f0e5;
+  color: #082052;
+  transition: transform 200ms ease, background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 10px 24px rgba(8, 32, 82, 0.06);
+}
+
+.feature-card:hover {
+  transform: scale(1.05) translateY(-4px);
+  background: #082052;
+  color: #f8f0e5;
+  box-shadow: 0 14px 32px rgba(8, 32, 82, 0.2);
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  background: #082052;
+  color: #f8f0e5;
+  border: 2px solid rgba(8, 32, 82, 0.3);
+  box-shadow: 0 8px 18px rgba(8, 32, 82, 0.12);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.feature-card:hover .feature-icon {
+  background: #f8f0e5;
+  color: #082052;
+  border-color: rgba(8, 32, 82, 0.5);
+}
+
+.feature-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .feature-section {
+    padding: 6rem 2.5rem 7rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .feature-card {
+    padding: 3rem;
+    gap: 2rem;
   }
 }
